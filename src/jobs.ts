@@ -10,6 +10,7 @@ export default class Jobs {
 
   async createPage() {
     this.browser = await puppeteer.launch({
+      headless: false,
       defaultViewport: null,
       args: ['--window-size=1920,1080'],
     });
@@ -45,7 +46,8 @@ export default class Jobs {
       await button.click();
       await new Promise((r) => setTimeout(r, 10000));
 
-      const text: any = ((await this.page.$x('/html/body/div[5]/div[3]/div[4]/div/div/main/div/section[1]/header/div[1]/small'))[0]);
+      const text: any = ((await this.page.$x('/html/body/div[5]/div[4]/div[4]/div/div/main/div/section[1]/header/div[1]/small'))[0]);
+      console.log(text);
       const result = await text.evaluate((el: any) => el.textContent);
       const arr = result.split(' ').filter((item: any) => item !== '');
       const firstItem = arr[1].replace('.', '');
