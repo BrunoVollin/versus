@@ -6,7 +6,7 @@ export default class MongoDB {
   private client: MongoClient;
 
   constructor() {
-    this.uri = 'mongodb://localhost:27017';
+    this.uri = 'mongodb+srv://root:root@cluster0.bqedr.mongodb.net/test';
     this.client = new MongoClient(this.uri);
   }
 

@@ -7,6 +7,7 @@ export default class Jobs {
   page!: puppeteer.Page;
 
   browser!: puppeteer.Browser;
+  delay = 3700;
 
   async createPage() {
     this.browser = await puppeteer.launch({
@@ -24,7 +25,7 @@ export default class Jobs {
       await this.page.type('#password', 'bruno4977');
       await this.page.click('.btn__primary--large');
       // eslint-disable-next-line no-promise-executor-return
-      await new Promise((r) => setTimeout(r, 10000));
+      await new Promise((r) => setTimeout(r, this.delay));
     } else {
       console.log('Page not created');
     }
@@ -32,21 +33,21 @@ export default class Jobs {
 
   async getJobsLinkedin(technology: TechnologyType, location: locationType) {
     if (this.page) {
-      const element1: any = ((await this.page.$x('/html/body/div[5]/header/div/div/div/div[2]/div[1]/div/div/input[1]'))[0]);
+      const element1: any = ((await this.page.$x('/html/body/div[6]/header/div/div/div/div[2]/div[1]/div/div/input[1]'))[0]);
       await element1.click({ clickCount: 3 });
       await element1.press('Backspace');
       await element1.type(technology);
 
-      const element2: any = ((await this.page.$x('/html/body/div[5]/header/div/div/div/div[2]/div[2]/div/div/input[1]'))[0]);
+      const element2: any = ((await this.page.$x('/html/body/div[6]/header/div/div/div/div[2]/div[2]/div/div/input[1]'))[0]);
       await element2.click({ clickCount: 3 });
       await element2.press('Backspace');
       await element2.type(location);
 
-      const button: any = ((await this.page.$x('/html/body/div[5]/header/div/div/div/div[2]/button[1]'))[0]);
+      const button: any = ((await this.page.$x('/html/body/div[6]/header/div/div/div/div[2]/button[1]'))[0]);
       await button.click();
-      await new Promise((r) => setTimeout(r, 10000));
+      await new Promise((r) => setTimeout(r, this.delay));
 
-      const text: any = ((await this.page.$x('/html/body/div[5]/div[4]/div[4]/div/div/main/div/section[1]/header/div[1]/small'))[0]);
+      const text: any = ((await this.page.$x('/html/body/div[6]/div[4]/div[4]/div/div/main/div/section[1]/header/div[1]/small'))[0]);
       console.log(text);
       const result = await text.evaluate((el: any) => el.textContent);
       const arr = result.split(' ').filter((item: any) => item !== '');
